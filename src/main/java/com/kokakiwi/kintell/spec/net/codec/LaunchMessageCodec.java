@@ -16,9 +16,8 @@ public class LaunchMessageCodec extends MessageCodec<LaunchMessage>
     {
         LaunchMessage msg = new LaunchMessage();
         
-        msg.setId(buf.readInt());
-        
         msg.setBoard(buf.readString());
+        msg.setId(buf.readInt());
         
         int size = buf.readInt();
         for (int i = 0; i < size; i++)
@@ -34,8 +33,8 @@ public class LaunchMessageCodec extends MessageCodec<LaunchMessage>
     @Override
     public void encode(DataBuffer buf, LaunchMessage msg)
     {
-        buf.writeInteger(msg.getId());
         buf.writeString(msg.getBoard());
+        buf.writeInteger(msg.getId());
         buf.writeInteger(msg.getPrograms().size());
         for (ProgramsListMessage.Program program : msg.getPrograms())
         {

@@ -123,8 +123,7 @@ public abstract class DataBuffer
     public DataBuffer readDataBuffer()
     {
         int size = readInt();
-        byte[] bytes = new byte[size];
-        read(bytes);
+        byte[] bytes = readBytes(size);
         
         DataBuffer buffer = new DynamicDataBuffer();
         buffer.setReadableBytes(bytes);
@@ -218,7 +217,7 @@ public abstract class DataBuffer
     
     public void writeBytes(byte[] b)
     {
-        write(b);
+        writeBytes(b, b.length);
     }
     
     public void writeBytes(byte[] b, int length)
@@ -230,7 +229,7 @@ public abstract class DataBuffer
     public void writeDataBuffer(DataBuffer buf)
     {
         writeInteger(buf.getReadableBytesSize());
-        write(buf.getReadableBytes());
+        writeBytes(buf.getReadableBytes());
     }
     
     public void writeShort(short s)

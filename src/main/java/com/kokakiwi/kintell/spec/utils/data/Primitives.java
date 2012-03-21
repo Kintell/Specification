@@ -1,6 +1,7 @@
 package com.kokakiwi.kintell.spec.utils.data;
 
 import java.math.BigInteger;
+import java.nio.charset.Charset;
 
 /*
  * Class from http://www.daniweb.com/software-development/java/code/216874

@@ -1,18 +1,3 @@
-/**
- * This file is part of Kowy Maker.
- * 
- * Kowy Maker is free software: you can redistribute it and/or modify it under
- * the terms of the GNU General Public License as published by the Free Software
- * Foundation, either version 3 of the License, or (at your option) any later
- * version.
- * 
- * Kowy Maker is distributed in the hope that it will be useful, but WITHOUT ANY
- * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
- * A PARTICULAR PURPOSE. See the GNU General Public License for more details.
- * 
- * You should have received a copy of the GNU General Public License along with
- * Kowy Maker. If not, see <http://www.gnu.org/licenses/>.
- */
 package com.kokakiwi.kintell.spec.utils;
 
 import java.io.File;
@@ -21,16 +6,12 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
 import org.apache.commons.io.IOUtils;
-import org.jdom.Document;
-import org.jdom.Element;
-import org.jdom.input.SAXBuilder;
 import org.yaml.snakeyaml.Yaml;
 
 public class Configuration
@@ -100,20 +81,6 @@ public class Configuration
                 merge(data, config);
             }
         }
-        else if (type.equalsIgnoreCase("xml"))
-        {
-            try
-            {
-                final SAXBuilder sxb = new SAXBuilder();
-                final Document document = sxb.build(inputFile);
-                final Element root = document.getRootElement();
-                merge(mapXML(root), config);
-            }
-            catch (final Exception e)
-            {
-                e.printStackTrace();
-            }
-        }
         else
         {
             final Properties props = new Properties();
@@ -138,77 +105,6 @@ public class Configuration
         }
         
         return true;
-    }
-    
-    private Map<String, Object> mapXML(Element element) throws Exception
-    {
-        final Map<String, Object> parsed = new HashMap<String, Object>();
-        
-        for (final Object children : (List<?>) element.getChildren())
-        {
-            final Element child = (Element) children;
-            final String name = child.getName();
-            Object value;
-            if (child.getChildren().size() > 0)
-            {
-                if (child.getAttributeValue("type") != null)
-                {
-                    if (child.getAttributeValue("type")
-                            .equalsIgnoreCase("list"))
-                    {
-                        value = listXML(child);
-                    }
-                    else
-                    {
-                        value = mapXML(child);
-                    }
-                }
-                else
-                {
-                    value = mapXML(child);
-                }
-            }
-            else
-            {
-                value = format(child.getText());
-            }
-            parsed.put(name, value);
-        }
-        
-        return parsed;
-    }
-    
-    private List<Object> listXML(Element element) throws Exception
-    {
-        final List<Object> parsed = new ArrayList<Object>();
-        
-        for (final Object children : element.getChildren())
-        {
-            final Element child = (Element) children;
-            parsed.add(format(child.getText()));
-        }
-        
-        return parsed;
-    }
-    
-    private Object format(String o)
-    {
-        Object r;
-        
-        if (o.equalsIgnoreCase("true"))
-        {
-            r = true;
-        }
-        else if (o.equalsIgnoreCase("false"))
-        {
-            r = false;
-        }
-        else
-        {
-            r = o;
-        }
-        
-        return r;
     }
     
     @SuppressWarnings("unchecked")

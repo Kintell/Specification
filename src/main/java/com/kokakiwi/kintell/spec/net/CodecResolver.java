@@ -48,6 +48,7 @@ public class CodecResolver
             registerCodec(ProgramsListMessageCodec.class);
             registerCodec(LaunchMessageCodec.class);
             registerCodec(StopMessageCodec.class);
+            registerCodec(DebugMessageCodec.class);
         }
         catch (Exception e)
         {

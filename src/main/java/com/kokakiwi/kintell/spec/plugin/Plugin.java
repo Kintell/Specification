@@ -5,18 +5,19 @@ public abstract class Plugin
     protected PluginDescriptionFile description = null;
     protected PluginLoader          loader      = null;
     
-    public void init(PluginDescriptionFile description, PluginLoader loader)
+    public final void init(PluginDescriptionFile description,
+            PluginLoader loader)
     {
         this.description = description;
         this.loader = loader;
     }
     
-    public PluginDescriptionFile getDescription()
+    public final PluginDescriptionFile getDescription()
     {
         return description;
     }
     
-    public PluginLoader getLoader()
+    public final PluginLoader getLoader()
     {
         return loader;
     }
