@@ -16,6 +16,7 @@ public class ConnectMessageCodec extends MessageCodec<ConnectMessage>
         ConnectMessage msg = new ConnectMessage();
         
         msg.setPseudo(buf.readString());
+        msg.setPassword(buf.readString());
         
         return msg;
     }
@@ -24,6 +25,7 @@ public class ConnectMessageCodec extends MessageCodec<ConnectMessage>
     public void encode(DataBuffer buf, ConnectMessage msg)
     {
         buf.writeString(msg.getPseudo());
+        buf.writeString(msg.getPassword());
     }
     
 }

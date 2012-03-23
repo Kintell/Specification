@@ -1,16 +1,20 @@
 package com.kokakiwi.kintell.spec.net.msg;
 
+import java.util.List;
+
+import com.google.common.collect.Lists;
+
 public class DebugMessage extends Message
 {
-    private String message;
+    private List<String> messages = Lists.newLinkedList();
     
-    public String getMessage()
+    public List<String> getMessages()
     {
-        return message;
+        return messages;
     }
     
-    public void setMessage(String message)
+    public void setMessages(List<String> messages)
     {
-        this.message = message;
+        this.messages = messages;
     }
 }

@@ -49,6 +49,7 @@ public class CodecResolver
             registerCodec(LaunchMessageCodec.class);
             registerCodec(StopMessageCodec.class);
             registerCodec(DebugMessageCodec.class);
+            registerCodec(WrongPasswordMessageCodec.class);
         }
         catch (Exception e)
         {

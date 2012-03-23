@@ -16,7 +16,12 @@ public class DebugMessageCodec extends MessageCodec<DebugMessage>
     {
         DebugMessage msg = new DebugMessage();
         
-        msg.setMessage(buf.readString());
+        int size = buf.readInt();
+        for (int i = 0; i < size; i++)
+        {
+            String message = buf.readString();
+            msg.getMessages().add(message);
+        }
         
         return msg;
     }
@@ -24,7 +29,11 @@ public class DebugMessageCodec extends MessageCodec<DebugMessage>
     @Override
     public void encode(DataBuffer buf, DebugMessage msg)
     {
-        buf.writeString(msg.getMessage());
+        buf.writeInteger(msg.getMessages().size());
+        for (String message : msg.getMessages())
+        {
+            buf.writeString(message);
+        }
     }
     
 }
