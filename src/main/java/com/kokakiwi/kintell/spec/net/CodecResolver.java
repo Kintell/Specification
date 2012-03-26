@@ -50,6 +50,7 @@ public class CodecResolver
             registerCodec(StopMessageCodec.class);
             registerCodec(DebugMessageCodec.class);
             registerCodec(WrongPasswordMessageCodec.class);
+            registerCodec(RankEntriesMessageCodec.class);
         }
         catch (Exception e)
         {
